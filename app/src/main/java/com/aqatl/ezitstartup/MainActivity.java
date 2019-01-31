@@ -9,10 +9,7 @@ import android.widget.*;
 public class MainActivity extends AppCompatActivity {
 	public static final String PLAYER_COUNT_EXTRA = "playerCount";
 
-	SeekBar playerCountChooser;
-	TextView playerCountTextView;
-
-	int playerCount;
+	NumberPicker playerCountChooser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,21 +17,15 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		playerCountChooser = findViewById(R.id.playerCountChooser);
-		playerCountTextView = findViewById(R.id.playerCountTextView);
 
-		playerCountChooser.setOnSeekBarChangeListener(new AbstractOnSeekBarChangeListener() {
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				playerCount = progress + 2;
-				playerCountTextView.setText(Integer.toString(playerCount));
-			}
-		});
-		playerCountChooser.setProgress(2 - 2);
+		playerCountChooser.setMinValue(2);
+		playerCountChooser.setMaxValue(16);
+		playerCountChooser.setValue(2);
 	}
 
 	public void startButtonClicked(View view) {
 		Intent intent = new Intent(this, GameActivity.class);
-		intent.putExtra(PLAYER_COUNT_EXTRA, playerCount);
+		intent.putExtra(PLAYER_COUNT_EXTRA, playerCountChooser.getValue());
 		startActivity(intent);
 	}
 }

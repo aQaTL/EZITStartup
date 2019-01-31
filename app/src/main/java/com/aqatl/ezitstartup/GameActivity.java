@@ -61,7 +61,7 @@ public class GameActivity extends AppCompatActivity {
 			int points = getPoints();
 			if (points >= 0) {
 				addPoints(points);
-				pointsInput.getText().clear();
+				pointsInput.setText("", TextView.BufferType.NORMAL);
 			}
 			return true;
 		}
